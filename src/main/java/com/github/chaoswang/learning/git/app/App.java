@@ -1,7 +1,7 @@
 package com.github.chaoswang.learning.git.app;
 
 /**
- * Hello world!
+ * 我的第一个Git App
  *
  */
 public class App 
