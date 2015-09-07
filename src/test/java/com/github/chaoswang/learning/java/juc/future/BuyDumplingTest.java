@@ -22,9 +22,10 @@ public class BuyDumplingTest {
 
 		// 第二种方式，注意这种方式和第一种方式效果是类似的，只不过一个使用的是ExecutorService，一个使用的是Thread
 		/*
-		 * BuyDumpling task = new BuyDumpling(); FutureTask<Integer> futureTask
-		 * = new FutureTask<Integer>(task); Thread thread = new
-		 * Thread(futureTask); thread.start();
+		 * BuyDumpling task = new BuyDumpling(); 
+		 * FutureTask<Integer> futureTask = new FutureTask<Integer>(task); 
+		 * Thread thread = new Thread(futureTask); 
+		 * thread.start();
 		 */
 
 		System.out.println("我在烧开水，花费4分钟");
