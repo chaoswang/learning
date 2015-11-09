@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.concurrent.BlockingQueue;
 
 class FileEnumerationTask implements Runnable {  
-    //å“‘å…ƒæ–‡ä»¶å¯¹è±¡ï¼Œæ”¾åœ¨é˜»å¡é˜Ÿåˆ—æœ€åï¼Œç”¨æ¥æ ‡ç¤ºæ–‡ä»¶å·²è¢«éå†å®Œ  
+    //ÑÆÔªÎÄ¼ş¶ÔÏó£¬·ÅÔÚ×èÈû¶ÓÁĞ×îºó£¬ÓÃÀ´±êÊ¾ÎÄ¼şÒÑ±»±éÀúÍê  
     public static File DUMMY = new File("");  
   
     private BlockingQueue<File> queue;  
@@ -18,19 +18,19 @@ class FileEnumerationTask implements Runnable {
     public void run() {  
         try {  
             enumerate(startingDirectory);  
-            queue.put(DUMMY);//æ‰§è¡Œåˆ°è¿™é‡Œè¯´æ˜æŒ‡å®šçš„ç›®å½•ä¸‹æ–‡ä»¶å·²è¢«éå†å®Œ  
+            queue.put(DUMMY);//Ö´ĞĞµ½ÕâÀïËµÃ÷Ö¸¶¨µÄÄ¿Â¼ÏÂÎÄ¼şÒÑ±»±éÀúÍê  
         } catch (InterruptedException e) {  
         }  
     }  
   
-    // å°†æŒ‡å®šç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶ä»¥Fileå¯¹è±¡çš„å½¢å¼æ”¾å…¥é˜»å¡é˜Ÿåˆ—ä¸­  
+    // ½«Ö¸¶¨Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼şÒÔFile¶ÔÏóµÄĞÎÊ½·ÅÈë×èÈû¶ÓÁĞÖĞ  
     public void enumerate(File directory) throws InterruptedException {  
         File[] files = directory.listFiles();  
         for (File file : files) {  
             if (file.isDirectory())  
 				enumerate(file);  
             else  
-                //å°†å…ƒç´ æ”¾å…¥é˜Ÿå°¾ï¼Œå¦‚æœé˜Ÿåˆ—æ»¡ï¼Œåˆ™é˜»å¡  
+                //½«ÔªËØ·ÅÈë¶ÓÎ²£¬Èç¹û¶ÓÁĞÂú£¬Ôò×èÈû  
                 queue.put(file);  
         }  
     }  

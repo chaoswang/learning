@@ -10,8 +10,8 @@ public class KeywordFinalTest {
 		KeywordFinal keywordFinal = new KeywordFinal();
 		Integer a = keywordFinal.getA();
 		Assert.assertEquals(1, a.intValue());
-		//å¸¸é‡å­˜å‚¨åœ¨æ–¹æ³•åŒºï¼Œåœ¨ç¨‹åºè¿è¡Œè¿‡ç¨‹ä¸­éå¿…è¦ä¸è¿›è¡Œå›æ”¶æœç´¢ï¼Œåœ¨ç¨‹åºè¿è¡Œç»“æŸæ—¶å†å›æ”¶
-		//ä»¥ä¸‹ä¸¤ç§èµ‹å€¼éƒ½ä¼šæŠ¥é”™
+		//³£Á¿´æ´¢ÔÚ·½·¨Çø£¬ÔÚ³ÌĞòÔËĞĞ¹ı³ÌÖĞ·Ç±ØÒª²»½øĞĞ»ØÊÕËÑË÷£¬ÔÚ³ÌĞòÔËĞĞ½áÊøÊ±ÔÙ»ØÊÕ
+		//ÒÔÏÂÁ½ÖÖ¸³Öµ¶¼»á±¨´í
 		a = null;
 		Assert.assertNull(a);
 		a = new Integer(2);

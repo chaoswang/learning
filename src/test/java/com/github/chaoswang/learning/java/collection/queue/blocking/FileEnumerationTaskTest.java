@@ -18,19 +18,19 @@ public class FileEnumerationTaskTest {
 		String keyword = in.nextLine();
 		in.close();
 
-		final int FILE_QUEUE_SIZE = 10;// é˜»å¡é˜Ÿåˆ—å¤§å°
-		final int SEARCH_THREADS = 100;// å…³é”®å­—æœç´¢çº¿ç¨‹ä¸ªæ•°
+		final int FILE_QUEUE_SIZE = 10;// ×èÈû¶ÓÁĞ´óĞ¡
+		final int SEARCH_THREADS = 100;// ¹Ø¼ü×ÖËÑË÷Ïß³Ì¸öÊı
 
-		// åŸºäºArrayBlockingQueueçš„é˜»å¡é˜Ÿåˆ—
+		// »ùÓÚArrayBlockingQueueµÄ×èÈû¶ÓÁĞ
 		BlockingQueue<File> queue = new ArrayBlockingQueue<File>(
 				FILE_QUEUE_SIZE);
 
-		// åªå¯åŠ¨ä¸€ä¸ªçº¿ç¨‹æ¥æœç´¢ç›®å½•
+		// Ö»Æô¶¯Ò»¸öÏß³ÌÀ´ËÑË÷Ä¿Â¼
 		FileEnumerationTask enumerator = new FileEnumerationTask(queue,
 				new File(directory));
 		new Thread(enumerator).start();
 
-		// å¯åŠ¨100ä¸ªçº¿ç¨‹ç”¨æ¥åœ¨æ–‡ä»¶ä¸­æœç´¢æŒ‡å®šçš„å…³é”®å­—
+		// Æô¶¯100¸öÏß³ÌÓÃÀ´ÔÚÎÄ¼şÖĞËÑË÷Ö¸¶¨µÄ¹Ø¼ü×Ö
 		for (int i = 1; i <= SEARCH_THREADS; i++)
 			new Thread(new SearchTask(queue, keyword)).start();
 	}

@@ -6,6 +6,19 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 
+
+/**
+ * add        Ôö¼ÓÒ»¸öÔªË÷                     Èç¹û¶ÓÁĞÒÑÂú£¬ÔòÅ×³öÒ»¸öIIIegaISlabEepeplianÒì³£
+ * remove   ÒÆ³ı²¢·µ»Ø¶ÓÁĞÍ·²¿µÄÔªËØ    Èç¹û¶ÓÁĞÎª¿Õ£¬ÔòÅ×³öÒ»¸öNoSuchElementExceptionÒì³£
+ * element  ·µ»Ø¶ÓÁĞÍ·²¿µÄÔªËØ             Èç¹û¶ÓÁĞÎª¿Õ£¬ÔòÅ×³öÒ»¸öNoSuchElementExceptionÒì³£
+ * offer       Ìí¼ÓÒ»¸öÔªËØ²¢·µ»Øtrue       Èç¹û¶ÓÁĞÒÑÂú£¬Ôò·µ»Øfalse
+ * poll         ÒÆ³ı²¢·µÎÊ¶ÓÁĞÍ·²¿µÄÔªËØ    Èç¹û¶ÓÁĞÎª¿Õ£¬Ôò·µ»Ønull
+ * peek       ·µ»Ø¶ÓÁĞÍ·²¿µÄÔªËØ             Èç¹û¶ÓÁĞÎª¿Õ£¬Ôò·µ»Ønull
+ * put         Ìí¼ÓÒ»¸öÔªËØ                      Èç¹û¶ÓÁĞÂú£¬Ôò×èÈû
+ * take        ÒÆ³ı²¢·µ»Ø¶ÓÁĞÍ·²¿µÄÔªËØ     Èç¹û¶ÓÁĞÎª¿Õ£¬Ôò×èÈû
+ * @author Administrator
+ *
+ */
 class SearchTask implements Runnable {
 	private BlockingQueue<File> queue;
 	private String keyword;
@@ -19,10 +32,10 @@ class SearchTask implements Runnable {
 		try {
 			boolean done = false;
 			while (!done) {
-				// å–å‡ºé˜Ÿé¦–å…ƒç´ ï¼Œå¦‚æœé˜Ÿåˆ—ä¸ºç©ºï¼Œåˆ™é˜»å¡
+				// È¡³ö¶ÓÊ×ÔªËØ£¬Èç¹û¶ÓÁĞÎª¿Õ£¬Ôò×èÈû
 				File file = queue.take();
 				if (file == FileEnumerationTask.DUMMY) {
-					// å–å‡ºæ¥åé‡æ–°æ”¾å…¥ï¼Œå¥½è®©å…¶ä»–çº¿ç¨‹è¯»åˆ°å®ƒæ—¶ä¹Ÿå¾ˆå¿«çš„ç»“æŸ
+					// È¡³öÀ´ºóÖØĞÂ·ÅÈë£¬ºÃÈÃÆäËûÏß³Ì¶Áµ½ËüÊ±Ò²ºÜ¿ìµÄ½áÊø
 					queue.put(file);
 					done = true;
 				} else
