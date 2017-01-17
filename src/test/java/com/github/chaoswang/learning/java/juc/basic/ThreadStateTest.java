@@ -39,7 +39,12 @@ public class ThreadStateTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//主线程持有锁，其它线程想获得锁，获取不到？？？
+//		try {
+//			TimeUnit.MILLISECONDS.sleep(1);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+		//主线程持有锁，其它线程想获得锁，获取不到？？？上面哪怕睡1ms，下面的状态都是TERMINATED
 		Assert.assertEquals(Thread.State.BLOCKED, testThread.getState());
 		
 		
