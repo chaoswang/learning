@@ -1,4 +1,4 @@
-package com.github.chaoswang.learning.java.tutorial.executor;
+package com.github.chaoswang.runnable.example.executor;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

@@ -8,7 +8,7 @@ public class MyArrayListTest {
 	
 	@Test
 	public void testAdd(){
-		MyArrayList myList = new MyArrayList(3);
+		MyArrayList<String> myList = new MyArrayList<String>(3);
 		myList.add("1");
 		myList.add("2");
 		myList.add("3");
@@ -17,5 +17,9 @@ public class MyArrayListTest {
 		Assert.assertEquals(4, myList.size());
 		String str = (String)myList.get(2);
 		Assert.assertEquals("3", str);
+		str = (String)myList.remove(2);
+		Assert.assertEquals("3", str);
+		str = (String)myList.get(2);
+		Assert.assertEquals("4", str);
 	}
 }

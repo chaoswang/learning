@@ -1,4 +1,4 @@
-package com.github.chaoswang.learning.java.tutorial.executor;
+package com.github.chaoswang.runnable.example.executor;
 
 import java.util.Timer;
 import java.util.TimerTask;

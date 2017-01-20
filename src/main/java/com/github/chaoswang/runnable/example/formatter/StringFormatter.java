@@ -1,4 +1,4 @@
-package com.github.chaoswang.learning.java.tutorial.formatter;
+package com.github.chaoswang.runnable.example.formatter;
 
 public class StringFormatter {
 	public static void main(String[] args) {

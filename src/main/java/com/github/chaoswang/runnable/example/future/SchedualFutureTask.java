@@ -1,4 +1,4 @@
-package com.github.chaoswang.learning.java.tutorial.future;
+package com.github.chaoswang.runnable.example.future;
 
 import java.util.Arrays;
 import java.util.List;
