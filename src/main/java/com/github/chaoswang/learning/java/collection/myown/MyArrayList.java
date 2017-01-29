@@ -14,9 +14,9 @@ public class MyArrayList<E> {
 	
 	//慢
 	public void add(E element){
-		//达到数组上限，按initialSize扩容
+		//达到数组上限，按initialSize扩容50%
 		if(++size == elements.length){
-			elements = Arrays.copyOf(elements, size + initialSize);
+			elements = Arrays.copyOf(elements, size + (int)Math.round(initialSize * 0.5));
 		}
 		elements[size - 1] = element;
 	}
