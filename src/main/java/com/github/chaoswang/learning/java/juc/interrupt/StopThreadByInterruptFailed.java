@@ -1,4 +1,4 @@
-package com.github.chaoswang.learning.java.thread.interrupt;
+package com.github.chaoswang.learning.java.juc.interrupt;
 
 public class StopThreadByInterruptFailed extends Thread {
 	boolean stop = false;
