@@ -348,30 +348,48 @@ public class JavaTest {
 
 
 4.1 Java 集合框架的Map, Set和List 有什么区别？
+map 是key-value形式
+set 是无序，不重复的集合
+list 是有序集合
 
 4.2 为什么Map 接口不继承Collection接口？
+set和list继承Collection接口
+map 是key-value形式
 
 4.3 为什么要有Iterator?
+迭代器模式 方便遍历集合中元素
 
 4.4 hashCode() 和 equals()方法是如何被HashMap所使用的？
-
+比如有1,2,3,4,5.。。9个桶
+如果是11，放到1号桶
+如果是12，放到2号桶
+。。。。。
+这样如果要查找11，hashCode()会告诉你直接去1号桶，迅速缩小范围
+但是因为1号桶有11,21.。。
+所以要用equals精确找到11
 
 4.5 Map接口提供了哪些集合视图可供使用？
+EntrySet
+KeySet
+values
 
 
 4.6 如何决定选用HashMap还是TreeMap？
-
+treemap中的key-value对是有序的
 
 4.7 我们如何从给定集合那里创建一个synchronized的集合？
+collection.synchronized(List<T> list)
 
 4.8 当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？
+深克隆一份集合作为参数传递
+或以现有集合为参数，new一个新集合
 
 4.9 下列关于ArrayList、Vector和LinkedList集合的说法正确是有哪些？
 A. ArrayList集合底层是数组实现，该集合线程不安全
 B. Vector 集合元素的存放是无序的
 C. LinkedList集合底层是链表结构，适合做元素的增删操作
 D. 这三个集合都是List接口的实现类
-
+A C D
 
 
 
@@ -387,6 +405,7 @@ B. 运行时出错
 C. 输出3
 D. 输出2
 
+D
 
 
 4.11 下列哪些集合属于Collection体系的子类？
@@ -394,7 +413,7 @@ A. TreeMap
 B. ArrayList
 C. Hashtable
 D. HashSet
-
+B D
 
 
 第五部分 Java 异常
