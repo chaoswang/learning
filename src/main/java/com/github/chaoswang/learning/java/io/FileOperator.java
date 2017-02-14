@@ -226,4 +226,32 @@ public class FileOperator {
 			}
 		}
 	}
+	
+	//读取一个.class文件的前4个字节， 转换成十六进制字符，检查是不是：CAFEBABE
+	public static void readClassFile(String filePath){
+		FileInputStream fis = null;
+		try {
+			fis = new FileInputStream(filePath);
+			byte[] bbuf = new byte[4];//从此输入流中读取的估计剩余字节数
+			int index = 0;
+			if((index = fis.read(bbuf, 0, 4)) == 4){
+				//由于read方法在读到流的末尾前，此方法一直阻塞。所以循环体内实际只会打印一次
+				System.out.println("current index:"+index);
+				System.out.println(new String(bbuf));
+			}
+			for(byte b : bbuf){
+				System.out.println(Integer.toHexString(b));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(fis != null){
+				try {
+					fis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }

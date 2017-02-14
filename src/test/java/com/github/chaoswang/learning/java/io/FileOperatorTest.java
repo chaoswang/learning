@@ -19,6 +19,8 @@ public class FileOperatorTest {
 	
 	private final static String testFile4 = testPath +File.separator+"copy" +File.separator+ "Demo.jpg";
 	
+	private final static String testFile5 = testPath +File.separator+"Duck.class";
+	
 //	@Test
 	@Ignore
 	public void testReadFileByCharacter(){
@@ -45,9 +47,16 @@ public class FileOperatorTest {
 		FileOperator.copyImageByBufferedWriter(testFile3, testFile4);
 	}
 	
-	@Test
+//	@Test
+	@Ignore
 	public void testReadFileBySpecificCharacter(){
 		FileOperator.writeFileBySpecificCharacter(testFile1);
 		FileOperator.readFileBySpecificCharacter(testFile1);
+	}
+	
+	@Test
+//	@Ignore
+	public void testReadClassFile(){
+		FileOperator.readClassFile(testFile5);
 	}
 }

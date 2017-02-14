@@ -419,20 +419,28 @@ B D
 第五部分 Java 异常
 
 5.1 Error和Exception 有什么区别？
-
+error更严重，程序运行错误，比如outofmemoryerror，
+exception是程序逻辑处理导致的异常
 
 5.2 Java中的检查型异常和非检查型异常有什么区别？
+非检查型异常 如runtimeexception不需要捕获
+检查型异常必须捕获或向上抛出，否则会有编译错误
 
 5.3 finally的作用是什么？ 什么时候会被执行？
+和try配合使用，在try代码块结束之后运行，无论try里面是否有异常，finally里的内容都会最后执行一遍
 
 
 5.4 finally, finalize有什么区别？
+finalize？
+
 
 下面有关Java异常处理的说法错误的是
 A. 一个try块只能有一条catch语句
 B. 一个try块中可以不使用catch语句
 C. catch块不能单独使用，必须始终与try块在一起
 D. finally块不能单独使用，必须始终与try块在一起
+
+A
 
 
 5.5 下面代码有什么问题？
@@ -449,14 +457,15 @@ public static void main(String args[]) {
         re.printStackTrace();
     }
 }
-
+1.start()并没有抛IOException的可能
+2.不应当使用Exception来捕获异常，而应该使用具体的异常
 
 
 5.6 把下面4种情况和后面的四种错误做一个匹配
-1, int[] a;      a[0] = 0;
-2. JVM正在运行你的程序的时候， 突然找不到一个系统相关的类（位于rt.jar/classes.zip中）
-3. 一个程序从IO Stream中读取数据，并且到达了Stream的结束处
-4. 一个程序从一个已经关闭了的IO Stream中读取数据
+1, int[] a;      a[0] = 0;     b 数组没有正确初始化，要指定长度
+2. JVM正在运行你的程序的时候， 突然找不到一个系统相关的类（位于rt.jar/classes.zip中）  a  classdefinenotfounderoor
+3. 一个程序从IO Stream中读取数据，并且到达了Stream的结束处  d
+4. 一个程序从一个已经关闭了的IO Stream中读取数据   c
 
 a. 出现Error
 b. 编译错误
@@ -483,10 +492,14 @@ public static void cat(File file) {
     }
 }
 
+两个地方的IOException没捕获
+
 
 第六部分 Java IO
 
 6.1  字节流与字符流有什么区别?
+字节流用inputstream和outputstream读写
+字符流用writer和reader读写
 
 6.2  下面程序的运行结果是什么？
 FileOutputStream fos = new FileOutputStream(“c:\\demo.txt”);
@@ -496,6 +509,9 @@ A.在C盘创建文件demo.txt,但文件是空的
 B.在C盘创建文件demo.txt,并写入数据abc
 C.将C盘已有的文件demo.txt中追加写入abc
 D.编译失败
+
+A  
+close之前会自动flush吗？
 
 
 6.3 下面代码的作用是什么？
@@ -515,6 +531,7 @@ B. 把d盘目录下的b.txt文件内容复制到c盘目录下的a.txt
 C. 读取c盘目录下a.txt文件，输出在控制台
 D. 把控制台的内容写入到d盘目录下的b.txt文件中
 
+A
 
 
 6.4 （本题7分）有一个二进制文件shoppingcart.data, 其中存储的数据依次是：
@@ -528,21 +545,33 @@ shoppingcart.data
 第七部分 Java 线程
 
 7.1 为什么Java中有多线程编程， 而很少提到Java多进程编程？
+一个java程序对应一个进程，多线程是程序执行的多条路径
 
 7.2 创建一个线程有那些方法？
+new Thread().start()
+new Runnable(){
+	run(){
+	}
+}.start()
 
 7.3 为什么我们调用start()方法时会执行run()方法，为什么我们不能直接调用run()方法？
-
+调用run()并不会另起一个线程，只是普通的方法调用
 
 7.4 Java 中多线程之间在什么情况下需要同步？
+对共享资源的并发读写时
 
 7.5 什么是不可变对象，它对写并发应用有什么帮助？ 
 
+
 7.6 现在有t1、t2、t3三个线程，你怎样保证t2在t1执行完后执行，t3在t2执行完后执行？
+t2.yeild(t1)
+t2.join(t3)
 
 
 7.7 有t1, t2, t3 三个线程， 都要对 r1, r2, r3, r4 这4个资源进行读写， 对每个资源读写之前需要获得锁才能操作，  由于线程的乱序执行，可能导致死锁。 
 请设计一种策略来避免死锁的产生。
+t1对r1, r2, r3, r4按顺序获得锁
+t2，t3与t1获取锁的顺序保持一致
 
 第八部分 Java 反射
 
