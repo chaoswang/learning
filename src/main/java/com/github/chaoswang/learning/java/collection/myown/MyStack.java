@@ -6,7 +6,7 @@ import java.util.EmptyStackException;
 public class MyStack<E> {
 	private int size = 0;
 	private int initialSize;
-	private Object[] elements = null;
+	private Object[] elements = null;//改为用自己的ArrayList来实现
 	
 	public MyStack(int initialSize){
 		this.initialSize = initialSize;
@@ -25,6 +25,10 @@ public class MyStack<E> {
 	//判断栈是否为空
 	public boolean empty(){
 		return size <= 0? true : false;
+	}
+	
+	public int size(){
+		return size;
 	}
 	
 	//查看栈顶元素

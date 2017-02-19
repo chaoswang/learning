@@ -2,26 +2,38 @@ package com.github.chaoswang.learning.java.collection.myown;
 
 public class MyLinkedList<E> {
 	private int size = 0;
-	private OneElement first = null;
-	private OneElement last = null;
+	private Node head = null;
+	private Node tail = null;
 	
 	//快
 	public void add(E element){
-		OneElement tmp = new OneElement(element, null);
-		if(last == null){
-			first = tmp;
+		Node tmp = new Node(element, null);
+		if(tail == null){
+			head = tmp;
 		}else{
-			last.next = tmp;;
+			tail.next = tmp;;
 		}
-		last = tmp;
+		tail = tmp;
 		size++;
+	}
+	
+	public void add(int index, E element){
+		
+	}
+	
+	public void addFirst(){
+		
+	}
+	
+	public void removeFirst(){
+		
 	}
 	
 	//快
 	public E remove(int index){
-		OneElement tmpBeore = this.getElement(index-1);
-		OneElement tmp = this.getElement(index);
-		OneElement tmpNext = this.getElement(index+1);
+		Node tmpBeore = this.getElement(index-1);
+		Node tmp = this.getElement(index);
+		Node tmpNext = this.getElement(index+1);
 		tmpBeore.next = tmpNext;
 		size--;
 		return tmp.element;
@@ -31,24 +43,27 @@ public class MyLinkedList<E> {
 		return size;
 	}
 	
-	private OneElement getElement(int index) {
-		OneElement tmp = first.next;
+	//慢
+	public E get(int index){
+		return this.getElement(index).element;
+	}
+	
+	private Node getElement(int index) {
+		Node tmp = head.next;
 		for(int i=0;i<index-1;i++){
 			tmp = tmp.next;
 		}
 		return tmp;
 	}
 	
-	//慢
-	public E get(int index){
-		return this.getElement(index).element;
-	}
-	
-	private class OneElement{
+	//不加static就和实例绑定了
+	private /*static*/ class Node{
 		private E element = null;
-		private OneElement next = null;
+		private Node next = null;
+		/*双向链表*/
+//		private Node previos = null;
 
-		public OneElement(E element, OneElement next) {
+		public Node(E element, Node next) {
 			this.element = element;
 			this.next = next;
 		}

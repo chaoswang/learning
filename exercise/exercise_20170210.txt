@@ -1,32 +1,40 @@
 第一部分： Java 概述
 
 1.1 Java 是怎么做到跨平台的？
+java程序在java虚拟机上运行，隔离了操作系统差异
 
 1.2 Java EE, Java SE, Java ME分别是什么？
+企业版，标准版，移动版
 
 1.3 简述JRE与JDK的区别?
+运行时环境，开发工具
 
 1.4 为什么要设置Java Home 和Path ?  
+操作系统可以识别java命令
 
 1.5 在运行java 程序时，为什么要设置classpath ?
+classpath可以指定要运行的class文件和依赖jar
 
 1.6 一个.java源文件是否可以包含多个类？ 有什么限制
+可以，只能有一个class是public的
 
 第二部分： 基本语法
 
 2.1 以下数据类型分别占多少字节？
-byte  
-short 
-int 
-long 
-float 
-double 
+byte  1
+short  2
+int  4
+long  8
+float  8    （4）
+double   16    （8）
 
 2.2 下面语句有什么错误？
 short s1 = 1; 
 s1 =s1 + 1;
+s1和1相加后，变为int类型，不能赋给short类型的s1
 
 2.3 int和Integer都可以代表一个整数， 为什么JDK设计了这两个类型？
+原生类型和包装类型，Integer是对象
 
 2.4 在脑子里运行下面的代码， x的值最终是多少？
 public class JavaTest {
@@ -39,6 +47,10 @@ public class JavaTest {
         System.out.println(x);
     }
 }
+2+2=4 x=4
+4+4=8 x=8
+8+8=16 x=16
+32
 
 2.5 请看下面的程序代码：
 switch(n){
@@ -49,7 +61,7 @@ switch(n){
 }
 当n为何值时，程序段可以输出字符串”second”
 　A． 0       B．1         C．2           D．以上都可以
-
+D
 
 
 2.6 请问 下面的代码执行完毕以后， b 的值， x的值，y的值各是多少？
@@ -57,14 +69,19 @@ int x=6,y=8;
 boolean b;
 b=x>y || ++x==--y;
 
-
+x>y || ++x true
+--y  true
+true  7  7
 
 2.7 请问 下面的代码执行完毕以后， b 的值， x的值，y的值各是多少？
 int x=6,y=8;
 boolean b;
 b=x>y  &&  ++x==--y;
 
-
+x>y  &&  ++x  false
+--y  true
+false 7  7    （false 6  8）
+x>y为false之后，后面的东西不会执行了
 
 2.8 下面的程序输出是什么？
 public class JavaTest {
@@ -79,20 +96,26 @@ public class JavaTest {
         System.out.println(str);
     }
 }
+1234
 
+str  -> 内存地址 0x1212 ->  "1234";
+参数str（str的副本） ->  内存地址 0x1212
+参数str（str的副本指向的内存地址发生变化）-> 内存地址 0x3434  ->  "welcome";
 
 2.9 有代码如下， 请问调用changeValue以后， 数组arr的值是多少？
-public class JavaTest {    
-    private static void changeValue(int[] arr) {
-        for (int i = 0; i < arr.length; i++)
-            arr[i] *= 2;
-    }
-    public static void main(String[] args) {
-        int[] arr = { 1, 2, 3, 4, 5 };            
-        changeValue(arr);
-        
-    }
+public class JavaTest {	
+	private static void changeValue(int[] arr) {
+		for (int i = 0; i < arr.length; i++)
+			arr[i] *= 2;
+	}
+	public static void main(String[] args) {
+		int[] arr = { 1, 2, 3, 4, 5 };			
+		changeValue(arr);
+		
+	}
 }
+
+{ 2, 4, 6, 8, 10 }
 
 
 2.10 下面代码有什么错误？
@@ -102,15 +125,17 @@ public class JavaTest {
         System.out.println("i = " + i);
     }
 }
+把final int类型强转为String
 
 
 2.11 下面的代码试图计算 2.00 - 1.10, 但是输出的值确是0.8999999999999999 ,这是为什么？
 public class JavaTest {
-    public static void main(String[] args) {
-        System.out.println(2.00-1.10);
-    }
+	public static void main(String[] args) {
+		System.out.println(2.00-1.10);
+	}
 }
-
+浮点数计算不准
+要精确的话需要用BigDecimal
 
 第三部分： 面向对象
 
@@ -125,48 +150,51 @@ public class JavaTest {
         return "Do JavaTest ...";
     }
 }
-
+doJavaTest不是static，调不了
 
 
 3.2 下面的代码有什么问题？ 为什么？
 public class JavaTest {
-    void doSomething() {
-        private String s = "";
-        int l = s.length();
-    }
+	void doSomething() {
+		private String s = "";
+		int l = s.length();
+	}
 }
-
+不能对局部变量加private
 
 
 3.3 试完成下述程序片段
 public class Point{
-    int x,y;
-    public  Point(int x,int y){
-        (   )=x; 
-        (   )=y;
+	int x,y;
+	public  Point(int x,int y){
+		(   )=x; 
+		(   )=y;
     }
     ...
 }
-A．Point.x   Point.y                    B．this.x   this.y
-C．super.x  super.y                    D．无解
+A．Point.x   Point.y					B．this.x   this.y
+C．super.x  super.y					D．无解
 
+B
 
 3.4 下面的代码有什么问题？
 
 public class JavaTest {
-    public static void main(String[] args) {
-        Hello obj = new Hello();
-        obj.msg += ",World!";
-        System.out.println(obj.msg);
-    }
+	public static void main(String[] args) {
+		Hello obj = new Hello();
+		obj.msg += ",World!";
+		System.out.println(obj.msg);
+	}
 }
 
 class Hello {
-    public String msg = "Hello";
-    public Hello(String msg) {
-        this.msg = msg;
-    }
+	public String msg = "Hello";
+	public Hello(String msg) {
+		this.msg = msg;
+	}
 }
+
+无此构造方法new Hello()
 
 
 3.5 下面的代码有什么问题？ 为什么？
@@ -175,6 +203,7 @@ public class JavaTest{
        return ++x; 
    }
 }
+final的int的值不能修改
 
 
 3.6 下面的代码有什么问题？ 为什么？
@@ -191,6 +220,8 @@ class Other {
    public int i;
 }
 
+没问题，并没有修改o的引用
+
 3.7 下面的程序输出什么值？
 public class JavaTest {
     public static void main(String args[]){
@@ -204,7 +235,7 @@ public class JavaTest {
           System.out.println("long:  "+i);
        }
 }
-
+"int:  "+100
 
 
 3.8 下面的代码输出什么：
@@ -234,14 +265,21 @@ public class JavaTest {
     }
 }
 
+"Apple"+100
+"Apple"
+
+"Apple"+100
+"Apple"  (Fruit,没有产生多态，java的多态是在方法层面的，对field不起作用)
+
+
 
 
 
 3.9 有class A定义如下
 class A {
-    protected int method1(int a, int b)    { 
-        return 0; 
-    }
+	protected int method1(int a, int b)	{ 
+		return 0; 
+	}
 }
 
 如果有类class B extends A , 在class B中，下列哪两个方法定义是有效的？
@@ -252,29 +290,29 @@ C. private int method1(int a, long b) { return 0; }
 D. public short method1(int a, int b) { return 0; }
 E. static protected int method1(int a, int b) { return 0; }
 
-
+A，E   （A，C）？？
 
 
 3.10 有一个类OuterClass定义如下：
 public class OuterClass {
-    public void someOuterMethod() {
-        // Line 3
-    }
+	public void someOuterMethod() {
+		// Line 3
+	}
 
-    public class InnerClass{
-    }
+	public class InnerClass{
+	}
 
-    public static void main(String[] argv) {
-        OuterClass o = new OuterClass();        
-        // Line 11
-    }
+	public static void main(String[] argv) {
+		OuterClass o = new OuterClass();		
+		// Line 11
+	}
 }
 下面哪个语句能够实例化InnerClass?
 A. new InnerClass(); // At line 3
 B. new InnerClass(); // At line 11
 C. new o.InnerClass(); // At line 11
 D. new OuterClass.InnerClass(); // At line 11
-
+A
 
 
 3.11 下面的代码输出什么？
@@ -303,24 +341,29 @@ public class JavaTest {
     }
 }
 
+before B
+"A"+100
+after B  （设计模式中的模板方法）
+
+
 3.12 下面的代码输出结果是什么？
 class Fruit {
-    public void setDate(Object d) {
-        System.out.println("Fruit.setDate(Object d)");
-    }
+	public void setDate(Object d) {
+		System.out.println("Fruit.setDate(Object d)");
+	}
 }
 class Apple extends Fruit {
-    public void setDate(Date d) {
-        System.out.println("Apple.setDate(Date d)");
-    }
+	public void setDate(Date d) {
+		System.out.println("Apple.setDate(Date d)");
+	}
 }
 public class JavaTest3 {
-    public static void main(String[] args) {
-        Fruit f = new Apple();
-        f.setDate(new Date());
-    }
+	public static void main(String[] args) {
+		Fruit f = new Apple();
+		f.setDate(new Date());
+	}
 }
-
+Apple.setDate(Date d)  （错了，参数类型不一样）？？
 
 
 3.13 下列关于类的继承的描述，正确的有哪些？
@@ -329,19 +372,23 @@ B. 一个类可以具有多个子类
 C. 子类会自动拥有父类所有的方法
 D. 一个类继承另一个类需要使用 extends 关键字
 
+B，D。private方法不能继承
+
 3.14 有java 类如下：
 
 public class JavaTest {
-    public static void main(String args[]) {
-        System.out.println(new JavaTest());
-    }    
+	public static void main(String args[]) {
+		System.out.println(new JavaTest());
+	}	
 }
 
 运行该Java 类， 出现的结果是： JavaTest@15db9742
 为什么会这样？
+对象的内存地址
 
 
 3.15 在面向对象程序中，实现代码复用主要有两种方式：继承和组合， 请描述下这两种方式的区别。
+
 
 
 第四部分： Java 集合
@@ -364,9 +411,9 @@ map 是key-value形式
 如果是11，放到1号桶
 如果是12，放到2号桶
 。。。。。
-这样如果要查找11，hashCode()会告诉你直接去1号桶，迅速缩小范围
+这样如果要查找11，hashCode()会告诉你直接去1号桶，迅速缩小范围（两个不同对象的hashcode可能是一样的）
 但是因为1号桶有11,21.。。
-所以要用equals精确找到11
+所以要用equals精确找到11（equals相等时，hashcode肯定相等）
 
 4.5 Map接口提供了哪些集合视图可供使用？
 EntrySet
@@ -459,7 +506,7 @@ public static void main(String args[]) {
 }
 1.start()并没有抛IOException的可能
 2.不应当使用Exception来捕获异常，而应该使用具体的异常
-
+（RuntimeException不可达）
 
 5.6 把下面4种情况和后面的四种错误做一个匹配
 1, int[] a;      a[0] = 0;     b 数组没有正确初始化，要指定长度
@@ -539,6 +586,8 @@ A
 这样的数据可能有多组， 写一个程序，读取该二进制文件的内容， 计算出该购物车的总价格(即每一项 产品价格*产品数量 的和)
 shoppingcart.data
 提示：使用DataInputStream
+（知道用什么流，怎么包装就行了
+java bytecode的读取要读二进制）
 
 6.5 （本题7分）写一个程序， 读取一个.class文件的前4个字节， 转换成十六进制字符，检查是不是：CAFEBABE
 
@@ -553,14 +602,21 @@ new Runnable(){
 	run(){
 	}
 }.start()
+（实现callable接口）
 
 7.3 为什么我们调用start()方法时会执行run()方法，为什么我们不能直接调用run()方法？
 调用run()并不会另起一个线程，只是普通的方法调用
+（start()应该是一个native方法，会映射到操作系统当中去）
 
 7.4 Java 中多线程之间在什么情况下需要同步？
 对共享资源的并发读写时
 
 7.5 什么是不可变对象，它对写并发应用有什么帮助？ 
+（如果所有资源都是只读的
+对String做任何修改时，都会生成新的对象
+每个对象创建出来后，就不会再变了
+实际开发中，很难做到不可变对象
+函数式编程天然解决该问题）
 
 
 7.6 现在有t1、t2、t3三个线程，你怎样保证t2在t1执行完后执行，t3在t2执行完后执行？
@@ -576,32 +632,38 @@ t2，t3与t1获取锁的顺序保持一致
 第八部分 Java 反射
 
 8.1 为什么需要反射？
+反射可以根据不同条件在运行时加载特定的类，有助于模块之间解耦
+（框架用的最多，在运行期仍然可以扩展
+操作字节码，可以实现aop
+因为java是静态语言，如果没有反射，很多功能都无法实现
 
 8.2 获取Class类型的对象有哪些：
 A. Object类的getClass()
 B. class静态属性
 C. 自己创建Class对象
 D. Class类的forName()静态方法
+A,B,D
+
 
 8.3 （本题7分）有Java 类如下：
 public class Employee {
-    
-    private String id;
-    private String name;
-    private int age;    
-    private Employee(){        
-    }
-    public Employee(String name, int age) {
-        this.id = "1001";
-        this.name = name;
-        this.age = age;
-    }    
-    private String getID(){
-        return this.id;
-    }    
-    public void sayHello(){
-        System.out.println("Hello, name ="+ name + "  age = "+age);
-    }
+	
+	private String id;
+	private String name;
+	private int age;	
+	private Employee(){		
+	}
+	public Employee(String name, int age) {
+		this.id = "1001";
+		this.name = name;
+		this.age = age;
+	}	
+	private String getID(){
+		return this.id;
+	}	
+	public void sayHello(){
+		System.out.println("Hello, name ="+ name + "  age = "+age);
+	}
 }
 要求： 
 (1) 通过反射的方式创建改Employee的实例
@@ -618,30 +680,30 @@ ArrayList<Integer> list = new ArrayList<Integer>();
 
 8.5 （本题8分）有AccountService, AccountServiceImpl , Transaction 类如下：
 public interface AccountService {      
-    public void transfer(String fromAccount, 
-            String toAccount, 
-            int ammount);      
+	public void transfer(String fromAccount, 
+    		String toAccount, 
+    		int ammount);      
     public void query(String accountId);
 }  
 public class AccountServiceImpl implements AccountService {
 
-    @Override
-    public void transfer(String fromAccount, String toAccount, int ammount) {
-        System.out.println("Transfer " + ammount + " from " + fromAccount + " to  " + toAccount );
-    }
-    
-    @Override
-    public void query(String accountId){
-        System.out.println("query account id:" +accountId);
-    }
+	@Override
+	public void transfer(String fromAccount, String toAccount, int ammount) {
+		System.out.println("Transfer " + ammount + " from " + fromAccount + " to  " + toAccount );
+	}
+	
+	@Override
+	public void query(String accountId){
+		System.out.println("query account id:" +accountId);
+	}
 }
 public class Transaction {
-    public void beginTx(){
-        System.out.println("Begin transaction");
-    }
-    public void commitTx(){
-        System.out.println("commit transaction");
-    }
+	public void beginTx(){
+		System.out.println("Begin transaction");
+	}
+	public void commitTx(){
+		System.out.println("commit transaction");
+	}
 }
 
 试用Java 动态代理实现如下功能：
@@ -652,6 +714,8 @@ commit transaction
 在调用AccountServiceImpl 的query("A100")， 输出结果：
 query account id:A100
 
+
+
 第九部分  Java 泛型
 
 9.1 下列说法错误的是
@@ -660,21 +724,24 @@ B.  在生成的Java字节码中是不包含泛型中的类型信息的。
 C. 泛型可以应用在接口， 类，和方法上。
 D. ArrayList<int> list = new ArrayList<int> 是合法的
 
-
+D
 
 9.2 下面的代码是否正确？
 public class AnimalHouse<E> {   
-    private E animal;    
-    AnimalHouse(){
-        animal = new E();
-    }        
+	private E animal;    
+	AnimalHouse(){
+		animal = new E();
+	}		
 }
+不正确（E是泛型标记，不能new）
+animal = (E)new Object();
 
 
 9.3 下面的代码输出的结果是什么？
 ArrayList<String> list1 = new ArrayList<String>();
 ArrayList<Integer> list2 = new ArrayList<Integer>();
 System.out.println(list1.getClass().equals(list2.getClass()));
+true
 
 
 9.4 下面的代码有问题吗？ 为什么？
@@ -682,38 +749,45 @@ ArrayList<Number> numbers = new ArrayList<Number>();
 numbers.add(new Integer(10));
 numbers.add(new Double(10.0d));
 
+没问题
+
 9.5 下面的泛型类经过类型擦除以后会变成什么？
 public class AnimalHouse<T> {   
-    private T animal;    
-    public T getAnimal(){
-        return this.animal;
-    }
+	private T animal;    
+	public T getAnimal(){
+		return this.animal;
+	}
 }
-
+Object
 
 9.6 泛型类同上一题，  有如下代码：
 AnimalHouse<Tiger> house = new AnimalHouse<Tiger>;
 Tiger t = house.getAnimal();
 经过类型擦除，在执行getAnimal()是JVM会怎么做？
 
-
+Java的泛型是伪泛型。为什么说Java的泛型是伪泛型呢?因为,在编译期间,所有的泛型信息都会被擦除掉
+（先返回Object类型，然后强转Tiger
 
 
 9.7 下面的代码有什么问题？ 该如何改正：
 public static <T> T  compare(T t1,T t2){
-    if(t1.compareTo(t2) >= 0){
-        return t1;
-    } else{
-        return t2;
-    }
+	if(t1.compareTo(t2) >= 0){
+		return t1;
+	} else{
+		return t2;
+	}
 }
+<T extends Comparable>
 
 
 9.8 下面代码的问题是什么？ 该如何改正？
-public static void main(String[] args) {        
-    ArrayList<Integer> list = new ArrayList<Integer>();            
-    show(list);
+public static void main(String[] args) {		
+	ArrayList<Integer> list = new ArrayList<Integer>();			
+	show(list);
 }
-public static void show(ArrayList<Number> list){        
-    //....
+public static void show(ArrayList<Number> list){		
+	//....
 }
+
+
+ArrayList<? extends Number> list = new ArrayList<Integer>();

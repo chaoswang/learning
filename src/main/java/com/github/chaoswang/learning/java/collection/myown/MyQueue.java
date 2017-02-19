@@ -7,7 +7,7 @@ public class MyQueue<E> {
 	private int size = 0;
 	private int capacitySize;
 	private OneElement first = null;
-	private OneElement last = null;
+	private OneElement last = null;//改为用自己的LinkedList实现
 	
 	public MyQueue(int capacitySize){
 		this.capacitySize = capacitySize;

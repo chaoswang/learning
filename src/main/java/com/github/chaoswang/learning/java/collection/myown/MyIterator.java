@@ -1,5 +1,7 @@
 package com.github.chaoswang.learning.java.collection.myown;
 
-public class MyIterator {
-
+public interface MyIterator {
+	/*在arraylist里实现一个迭代器*/
+	boolean hasNext();
+	Object next();
 }

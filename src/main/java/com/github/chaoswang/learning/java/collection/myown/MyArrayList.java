@@ -21,6 +21,10 @@ public class MyArrayList<E> {
 		elements[size - 1] = element;
 	}
 	
+	public void add(int index, E element){
+		
+	}
+	
 	public int size(){
 		return size;
 	}
@@ -39,5 +43,27 @@ public class MyArrayList<E> {
 		 elements[size -1] = null;
 		 size--;
 		 return removed;
+	}
+	
+	//好处在于隐藏内部实现，只对外暴露hasnext和next
+	public MyIterator iterator(){
+		return new ArrayListIterator();
+	}
+	
+	//这个地方千万不能用static，因为要和实例绑定
+	private class ArrayListIterator implements MyIterator{
+		int position;
+		
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return position == size ? false : true;
+		}
+
+		@Override
+		public Object next() {
+			// TODO Auto-generated method stub
+			return elements[position];
+		}
 	}
 }
