@@ -6,7 +6,7 @@ import java.util.EmptyStackException;
 public class MyStack<E> {
 	private int size = 0;
 	private int initialSize;
-	private Object[] elements = null;//改为用自己的ArrayList来实现
+	private Object[] elements = null;//可以改为用自己的ArrayList来实现
 	
 	public MyStack(int initialSize){
 		this.initialSize = initialSize;
@@ -32,7 +32,7 @@ public class MyStack<E> {
 	}
 	
 	//查看栈顶元素
-	public E peek() throws EmptyStackException{
+	public E peek(){
 		if(size == 0){
 			throw new EmptyStackException();
 		}
@@ -40,7 +40,7 @@ public class MyStack<E> {
 	}
 	
 	//弹出栈顶元素
-	public E pop() throws EmptyStackException{
+	public E pop(){
 		if(size == 0){
 			throw new EmptyStackException();
 		}

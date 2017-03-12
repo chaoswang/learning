@@ -3,10 +3,6 @@ package com.github.chaoswang.learning.java.collection.myown;
 import java.util.List;
 
 public class MyTree {
-	/*实现二叉树，leftchild总比parent小，rightchild总比parent大
-	 * 插入值的时候，要递归操作
-	 * 
-	 * */
 
 	public MyTree(MyTreeNode treeNode){
 		
@@ -15,7 +11,7 @@ public class MyTree {
 	
 	private class MyTreeNode {
 		private MyTreeNode parent;
-		private List<MyTreeNode> children;//二叉树，限制为left和right
+		private List<MyTreeNode> children;//二叉树时，限制为left和right
 		private boolean allowsChildren;
 		private Object userObject;//节点都是用来存储数据的
 		

@@ -7,14 +7,14 @@ public class MyQueue<E> {
 	private int size = 0;
 	private int capacitySize;
 	private OneElement first = null;
-	private OneElement last = null;//改为用自己的LinkedList实现
+	private OneElement last = null;//可以改为用自己的LinkedList实现
 	
 	public MyQueue(int capacitySize){
 		this.capacitySize = capacitySize;
 	}
 	
 	//插入队尾   队列满时抛异常
-	public void add(E element) throws IllegalStateException{
+	public void add(E element){
 		if(size+1 > capacitySize){
 			throw new IllegalStateException("over capacity.");
 		}
@@ -42,7 +42,7 @@ public class MyQueue<E> {
 	}
 	
 	//移除队头元素，队列为空时抛异常
-	public E remove() throws NoSuchElementException{
+	public E remove(){
 		if(size == 0){
 			throw new NoSuchElementException();
 		}
@@ -65,7 +65,7 @@ public class MyQueue<E> {
 	}
 	
 	//返回队头元素，但是不移除，队列为空时抛异常
-	public E element() throws NoSuchElementException{
+	public E element(){
 		if(size == 0){
 			throw new NoSuchElementException();
 		}

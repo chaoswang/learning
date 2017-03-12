@@ -19,10 +19,35 @@ public class MyArrayListTest {
 		Assert.assertEquals(4, myList.size());
 		String str = myList.get(2);
 		Assert.assertEquals("3", str);
-		str = myList.remove(2);
+		
+	}
+	
+	@Test
+	public void testInsert(){
+		MyArrayList<String> myList = new MyArrayList<String>(3);
+		myList.add("1");
+		myList.add("2");
+		myList.add("4");
+		String str = myList.get(2);
+		Assert.assertEquals("4", str);
+		myList.add(2,"3");
+		str = myList.get(2);
+		Assert.assertEquals("3", str);
+	}
+	
+	@Test
+	public void testRemove(){
+		MyArrayList<String> myList = new MyArrayList<String>(3);
+		myList.add("1");
+		myList.add("2");
+		myList.add("3");
+		myList.add("4");
+		String str = myList.remove(2);
 		Assert.assertEquals("3", str);
 		str = myList.get(2);
 		Assert.assertEquals("4", str);
 		Assert.assertEquals(3, myList.size());
 	}
+	
+	
 }
