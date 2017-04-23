@@ -27,4 +27,37 @@ public class BasicTest {
 				.subscribe(System.out::println, Throwable::printStackTrace);
 		TimeUnit.SECONDS.sleep(1);
 	}
+	
+	@Test
+	public void testParallel() throws InterruptedException{
+		Flowable.range(1, 10)
+				.parallel()
+				.runOn(Schedulers.computation())
+				.map(v -> v * v)
+				.sequential()
+				.subscribe(System.out::println);
+		TimeUnit.SECONDS.sleep(1);
+	}
+	
+	@Test
+	public void testFilter() throws InterruptedException{
+		Flowable.range(1, 10)
+				.subscribeOn(Schedulers.newThread())
+				.filter(x -> x % 2 == 0)
+				.subscribe(System.out::println, Throwable::printStackTrace);
+		TimeUnit.SECONDS.sleep(1);
+	}
+	
+	@Test
+	public void testFilterPrimeNumber() throws InterruptedException{
+		//2开始，后面取20个数
+		Flowable.range(2, 20)
+				.subscribeOn(Schedulers.newThread())
+				.filter(x -> Flowable.range(2, x - 2)//2开始，后面取x-2个数
+						.filter(y -> x % y == 0)
+						.isEmpty()
+						.blockingGet())
+				.subscribe(System.out::println, Throwable::printStackTrace);
+		TimeUnit.SECONDS.sleep(1);
+	}
 }
