@@ -32,7 +32,7 @@ public class BasicTest {
 	public void testParallel() throws InterruptedException{
 		Flowable.range(1, 10)
 				.parallel()
-				.runOn(Schedulers.computation())
+				.runOn(Schedulers.computation())//根据主机cpu核数选择线程数
 				.map(v -> v * v)
 				.sequential()
 				.subscribe(System.out::println);
@@ -57,6 +57,48 @@ public class BasicTest {
 						.filter(y -> x % y == 0)
 						.isEmpty()
 						.blockingGet())
+				.subscribe(System.out::println, Throwable::printStackTrace);
+		TimeUnit.SECONDS.sleep(1);
+	}
+	
+	@Test
+	public void testThreadSwitch() throws InterruptedException{
+		//1开始，后面取10个数
+		Flowable.range(1, 10)
+				//第一级处理
+				.subscribeOn(Schedulers.computation())
+				.map(x -> {
+					System.out.println(
+							Thread.currentThread().getName() + " " + x
+							);
+					return x;
+				})
+				//第二级处理，对第二级来说，第一级是生产者，
+				//rx框架帮你做好了第一级线程和第二级线程之间的同步
+				.observeOn(Schedulers.computation())//这行注释掉就会退化成单线程
+				.map(x -> {
+					System.out.println(
+							Thread.currentThread().getName() + " " + x
+							);
+					return x;
+				})
+				.subscribe((x) -> System.out.println(
+						Thread.currentThread().getName() + " " + x + " main task"
+						) , Throwable::printStackTrace);
+		TimeUnit.SECONDS.sleep(1);
+	}
+	
+	/**
+	 * 遍历整数数字字符串数组，把每个字符串按它的数值大小重复相应次数后，输出
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void testFlatMap() throws InterruptedException{
+		String[] strs = {"1","2","3","4"};
+		Flowable.fromArray(strs)
+				.subscribeOn(Schedulers.newThread())
+				.flatMap(s -> Flowable.fromArray(s)//把s再包装成流，才能进行repeat调用，不能直接对s进行repeat
+						.repeat(Integer.parseInt(s)))
 				.subscribe(System.out::println, Throwable::printStackTrace);
 		TimeUnit.SECONDS.sleep(1);
 	}
